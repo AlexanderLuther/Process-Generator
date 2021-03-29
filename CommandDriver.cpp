@@ -231,7 +231,7 @@ void CommandDriver::print(Command* command, vector<Stem*>* stems){
         case 1:
             stem = this->getStem(command->getId(), stems);  
             cout<<"Pausa de 2 segundos para que todos los procesos se actualicen correctamente"<<endl;
-            //sleep(2);
+            sleep(2);
             filesDriver->writeFile(to_string(stem->getPID()));
         break;
     }
