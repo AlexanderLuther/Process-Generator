@@ -1,0 +1,7 @@
+enum CommandType{
+    CREATE_TREE,
+    CREATE_TREE_BRANCH,
+    CREATE_TREE_BRANCH_LEAF,
+    SHOW,
+    PRINT
+};
