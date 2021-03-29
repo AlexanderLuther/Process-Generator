@@ -9,6 +9,8 @@
 #include <algorithm>
 #include <vector>
 #include <string>
+#include <bits/stdc++.h>
+#include "FilesDriver.h"
 #include "Stem.h"
 #include "Command.h"
 
@@ -19,7 +21,8 @@ class CommandDriver{
     private:
         Stem* stem;
         vector<string> dataList;
-
+        FilesDriver* filesDriver;
+        
     private:
         void splitData(string data);
         int searchById(int id, vector<Stem*>* stems);
@@ -31,9 +34,10 @@ class CommandDriver{
         void createTreeBranchLeaf(Command* command, vector<Stem*>* stems);
         void print(Command* command, vector<Stem*>* stems);
         void show(Command* command, vector<Stem*>* stems);
+        void removeStem(int id, vector<Stem*>* stems);
 
     public:
-        CommandDriver();
+        CommandDriver(FilesDriver* filesDriver);
         Command* getCommand(string data);
         void executeCommand(Command* command, vector<Stem*>* stems);
         ~CommandDriver();

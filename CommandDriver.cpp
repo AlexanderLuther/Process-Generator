@@ -1,6 +1,8 @@
 #include "CommandDriver.h"
 
-CommandDriver::CommandDriver(){}
+CommandDriver::CommandDriver(FilesDriver* filesDriver){
+    this->filesDriver = filesDriver;
+}
 
 Command* CommandDriver::getCommand(string data){
     int parenthsisOIndex = data.find("(");
@@ -65,6 +67,7 @@ void CommandDriver::executeCommand(Command* command, vector<Stem*>* stems){
             createTreeBranchLeaf(command, stems);
         break;
         case PRINT:
+            print(command, stems);
         break;
         case SHOW:
         break;
@@ -87,6 +90,15 @@ int CommandDriver::searchById(int id, vector<Stem*>* stems){
     return 0;
 }
 
+void CommandDriver::removeStem(int id, vector<Stem*>* stems){
+    for(int i=0; i<stems->size(); i++){
+        if(stems->at(i)->getId() == id){
+           //
+            break;
+        }
+    }
+}
+
 /**
  * Metodo que retorna un puntero a una instancia de la clase  Stem
  * Busca dentro de la lista stems y si algun elemento coincide con
@@ -98,6 +110,7 @@ Stem* CommandDriver::getStem(int id, vector<Stem*>* stems){
     }
     return nullptr;
 }
+
 
 /**
  * Metodo que verifica que la cantidad de tallos no exceda a la cantidad maxima.
@@ -197,9 +210,29 @@ void CommandDriver::createTreeBranchLeaf(Command* command, vector<Stem*>* stems)
             if(this->verifyBranchesAmount(command, 1)){
                 if(this->verifyLeavesAmount(command, 1)){
                     stem = this->getStem(command->getId(), stems);  
-                    stem->modifyStem(command); 
+                    stem->modifyStem(command);
+                    if(command->getBranchesAmount() == 0){
+                        this->removeStem(command->getId(), stems);
+                    } 
                 } 
             } 
+        break;
+    }
+}
+
+void CommandDriver::print(Command* command, vector<Stem*>* stems){
+    switch(this->searchById(command->getId(), stems)){
+        //No existe la Planta
+        case 0:
+            throw (string)"No existe ninguna Planta con Id=" + to_string(command->getId()) + ".";
+        break;
+
+        //Existe planta
+        case 1:
+            stem = this->getStem(command->getId(), stems);  
+            cout<<"Pausa de 2 segundos para que todos los procesos se actualicen correctamente"<<endl;
+            //sleep(2);
+            filesDriver->writeFile(to_string(stem->getPID()));
         break;
     }
 }

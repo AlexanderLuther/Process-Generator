@@ -22,6 +22,7 @@ void Stem::createStem(Command* command){
         break;
         //Proceso Consola
         default:
+            this->setPID(tempPID);
             this->write(to_string(this->getId()), command);
             pthread_create(&thread, NULL, thread_run, NULL);
         break;

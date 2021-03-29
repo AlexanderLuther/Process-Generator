@@ -1,5 +1,4 @@
 #include "FilesDriver.h"
-#define PATH "resources/file.txt"
 
 FilesDriver::FilesDriver(){
 }
@@ -11,7 +10,8 @@ FilesDriver::FilesDriver(){
  *          false Si no se encuentra el archivo.
 */
 bool FilesDriver::fileExist(){
-    file.open(PATH, ios::in);
+    ifstream file;
+    file.open(READ_PATH, ios::in);
     if(file.fail()){
         return false;
     } 
@@ -23,6 +23,8 @@ bool FilesDriver::fileExist(){
  * return String con los datos obtenidos. 
 */
 void FilesDriver::readFile(vector<string>* data){
+    ifstream file;  
+    file.open(READ_PATH, ios::in);
     string currentLine;
     while(!file.eof()){
         getline(file,currentLine);
@@ -31,6 +33,29 @@ void FilesDriver::readFile(vector<string>* data){
     }
     file.close();
 }
+
+/**
+ * Metodo encargado de escribir datos dentro de un archivo de texto.
+ */ 
+void FilesDriver::writeFile(string PID){
+    string data;
+    FILE * stream;
+    const int max_buffer = 256;
+    char buffer[max_buffer];
+    //cmd.append(" 2>&1");
+
+    stream = popen(("pstree " + PID).c_str(), "r");
+    if (stream) {
+    while (!feof(stream))
+      if (fgets(buffer, max_buffer, stream) != NULL) data.append(buffer);
+    pclose(stream);
+    }
+
+    ofstream file(WRITE_PATH);
+    file << data;
+    file.close();
+}
+
 
 FilesDriver::~FilesDriver(){
 }

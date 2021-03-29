@@ -9,8 +9,8 @@ void menu();
 void textInputMode();
 void interactiveMode();
 
-CommandDriver* commandDriver = new CommandDriver();
 FilesDriver* filesDriver = new FilesDriver();
+CommandDriver* commandDriver = new CommandDriver(filesDriver);
 vector<Stem*>* stems = new vector<Stem*>();
 Command* command;
 

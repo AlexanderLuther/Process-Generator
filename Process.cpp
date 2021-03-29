@@ -12,9 +12,12 @@ int Process::getId(){
     return id;
 }
 
-void Process::kill(int pid){
-    std::string statement = "kill -9" + pid;
-    system(statement.c_str());
+int Process::getPID(){
+    return PID;
+}
+
+void Process::setPID(int PID){
+    this->PID = PID;
 }
 
 Process::~Process(){

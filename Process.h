@@ -7,12 +7,14 @@ class Process{
 
     private:
         int id; 
+        int PID;
 
     public:
         Process(int id);
         int getId();
         void setId(int id);
-        void kill(int pid);
+        int getPID();
+        void setPID(int PID);
         ~Process();
 };
 
