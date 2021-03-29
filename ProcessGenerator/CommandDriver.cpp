@@ -229,10 +229,11 @@ void CommandDriver::print(Command* command, vector<Stem*>* stems){
 
         //Existe planta
         case 1:
-            stem = this->getStem(command->getId(), stems);  
-            cout<<"Pausa de 2 segundos para que todos los procesos se actualicen correctamente"<<endl;
-            sleep(2);
-            filesDriver->writeFile(to_string(stem->getPID()));
+            stem = this->getStem(command->getId(), stems);
+            string path = QFileDialog::getSaveFileName(NULL, ("Guardar Archivo")).toStdString();
+            //cout<<"Pausa de 2 segundos para que todos los procesos se actualicen correctamente"<<endl;
+            //sleep(2);
+            filesDriver->writeFile(to_string(stem->getPID()), path);
         break;
     }
 }

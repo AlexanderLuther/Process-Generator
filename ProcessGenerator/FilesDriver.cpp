@@ -22,9 +22,9 @@ bool FilesDriver::fileExist(){
  * Metodo encargado de obtener los datos contenidos dentro de un archivo.
  * return String con los datos obtenidos. 
 */
-void FilesDriver::readFile(vector<string>* data){
+void FilesDriver::readFile(vector<string>* data, string path){
     ifstream file;  
-    file.open(READ_PATH, ios::in);
+    file.open(path.c_str(), ios::in);
     string currentLine;
     while(!file.eof()){
         getline(file,currentLine);
@@ -37,12 +37,12 @@ void FilesDriver::readFile(vector<string>* data){
 /**
  * Metodo encargado de escribir datos dentro de un archivo de texto.
  */ 
-void FilesDriver::writeFile(string PID){
+void FilesDriver::writeFile(string PID, string path){
     string data;
     FILE * stream;
     const int max_buffer = 256;
     char buffer[max_buffer];
-    //cmd.append(" 2>&1");
+
 
     stream = popen(("pstree " + PID).c_str(), "r");
     if (stream) {
@@ -51,7 +51,7 @@ void FilesDriver::writeFile(string PID){
     pclose(stream);
     }
 
-    ofstream file(WRITE_PATH);
+    ofstream file(path);
     file << data;
     file.close();
 }

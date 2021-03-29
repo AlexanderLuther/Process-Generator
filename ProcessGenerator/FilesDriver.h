@@ -16,8 +16,8 @@ class FilesDriver{
     public:
         FilesDriver();
         bool fileExist();
-        void readFile(vector<string>* data);
-        void writeFile(string data);
+        void readFile(vector<string>* data, string path);
+        void writeFile(string data, string path);
         ~FilesDriver();
 };
 

@@ -13,6 +13,10 @@
 #include "FilesDriver.h"
 #include "Stem.h"
 #include "Command.h"
+#include "QFileDialog"
+
+#include <QMainWindow>
+#include <iostream>
 
 using namespace std;
 
