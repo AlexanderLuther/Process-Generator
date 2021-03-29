@@ -23,8 +23,8 @@ void MainFrame::on_executeButton_clicked(){
             commandDriver->executeCommand(command, stems);
             ui->historyArea->append(QString::fromStdString(command->getCommand()));
         }
-    } catch(QString msg){
-        ui->historyArea->append(msg);
+    } catch(string exception){
+        ui->historyArea->append(QString::fromStdString(exception));
     }
     ui->commandArea->clear();
 }
