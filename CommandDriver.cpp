@@ -93,7 +93,7 @@ int CommandDriver::searchById(int id, vector<Stem*>* stems){
 void CommandDriver::removeStem(int id, vector<Stem*>* stems){
     for(int i=0; i<stems->size(); i++){
         if(stems->at(i)->getId() == id){
-           //
+            stems->erase(stems->begin()+i,stems->begin()+i+1);
             break;
         }
     }
